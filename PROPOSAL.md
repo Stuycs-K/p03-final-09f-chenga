@@ -18,7 +18,7 @@ How you will be using the topics covered in class in the project.
 
 How you are breaking down the project and who is responsible for which parts.
 
-Files: read dictionary file with word bank, store highscore per game session
+Files: read dictionary file with word bank, store highscore
 Fork: child process provide hint or process player input
 Shared Memory: allow multiple game processes to be run at the same time for highscore
 Semaphore: updating shared memory one process at a time

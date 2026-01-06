@@ -2,10 +2,8 @@
 
 This document must be updated daily every time you finish a work session.
 
-## Amy Smith  (CHANGE THIS!!!!! Also change the file name!)
+## Alvin Cheng
 
-### 2024-01-02 - Brief description
-Expanded description including how much time was spent on task.
-
-### 2024-01-03 - Brief description
-Expanded description including how much time was spent on task.
+### 2025-01-06 - Repo Setup
+Cloned Repo, Filled in README.md, copied over PROPOSAL.md, created branch "Alvin",
+created .c and .h files, started hangman.c get random word. getWord() function
