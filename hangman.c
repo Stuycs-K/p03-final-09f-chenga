@@ -13,20 +13,22 @@ int err(){
 }
 
 struct wordStruct {
+  char catagory[50];
   char word[50];
-  char catagory[];
 }
 
 void getWord(){
-  int wordCount = 0;
-  char words[256];
-  int r_file = open("wordBank.txt", O_RDONLY, 0);
-  if (r_file == -1) err();
+  int csv = open("wordBank.csv", O_RDONLY);
+  if (csv == -1) err();
 
+  int wordCount = 0;
   char buffer[1];
   int pos = 0;
-  while(read(r_file, buffer, 1) > 0){
-    if (buffer[0] == '\n')
+  char words[256];
+  while(read(csv, buffer, 1) > 0){
+    if (buffer[0] == '\n'){
+      if (pos == 0) continue;
+    }
   }
 
   srand(time(NULL));

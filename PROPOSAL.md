@@ -19,7 +19,7 @@ How you will be using the topics covered in class in the project.
 How you are breaking down the project and who is responsible for which parts.
 
 Files: read dictionary file with word bank, as well as a different one to store highscore. The word bank file will be a csv file with one colume being the category and the other being the word. This will be read into a struct.
-Fork: child process provide hint or process player input
+Fork: child process provide hint or process player input(needs to be updated, no need for child process)
 Shared Memory: allow multiple game processes to be run at the same time for highscore
 Semaphore: updating shared memory one process at a time
 Signals: exiting
