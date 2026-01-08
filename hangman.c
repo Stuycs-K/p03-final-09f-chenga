@@ -13,26 +13,36 @@ int err(){
 }
 
 struct wordStruct {
-  char catagory[50];
+  char category[50];
   char word[50];
 }
 
-void getWord(){
+struct wordStruct getWord(){
   int csv = open("wordBank.csv", O_RDONLY);
   if (csv == -1) err();
-
+  struct wordStruct * wordsList = malloc(sizeof(struct wordStruct) * 100); //come back to this
   int wordCount = 0;
   char buffer[1];
   int pos = 0;
-  char words[256];
+  char lines[256];
   while(read(csv, buffer, 1) > 0){
     if (buffer[0] == '\n'){
       if (pos == 0) continue;
+      lines[pos] = '\0';
+      pos = 0;
+
+      sscanf(lines, "%s,%s", &wordsList[wordCount].category, &wordsList[wordCount].word);
+      wordCount++;
+    }
+    else{
+      lines[pos] = buffer[0];
+      pos++;
     }
   }
-
   srand(time(NULL));
-  int wordNum = rand() % wordCount;
+  int wordIndex = rand() % wordCount;
+
+  return wordsList[wordIndex];
 }
 void startGame(){
 
