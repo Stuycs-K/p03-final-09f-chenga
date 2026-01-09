@@ -1,21 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <time.h>
+#include "hangman.h"
 
 int err(){
     printf("errno %d\n", errno);
     printf("%s\n", strerror(errno));
     exit(1);
 }
-
-struct wordStruct {
-  char category[50];
-  char word[50];
-};
 
 struct wordStruct getWord(){
   int csv = open("wordBank.csv", O_RDONLY);
@@ -67,7 +56,7 @@ void startRound(){
     fflush(stdout);
     char guess[10];
     fgets(guess, sizeof(guess), stdin);
-    
+
     int numfound = 0;
     for (int i = 0; i < wordLen; i++){
       if (strcasecmp(word[i], guess[0])){
@@ -86,7 +75,7 @@ void startRound(){
   }
   else{
     printf("\nGame Over! The word was: %s\n", word);
-  } 
+  }
 
 
 }
