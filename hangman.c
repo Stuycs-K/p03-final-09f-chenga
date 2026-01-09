@@ -15,7 +15,7 @@ int err(){
 struct wordStruct {
   char category[50];
   char word[50];
-}
+};
 
 struct wordStruct getWord(){
   int csv = open("wordBank.csv", O_RDONLY);
