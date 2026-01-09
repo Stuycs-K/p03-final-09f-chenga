@@ -39,6 +39,8 @@ struct wordStruct getWord(){
       pos++;
     }
   }
+  close(csv);
+
   srand(time(NULL));
   int wordIndex = rand() % wordCount;
   //change so that when a word is chosen, it is taken out of the csv
@@ -46,17 +48,19 @@ struct wordStruct getWord(){
 }
 void startRound(){
   struct wordStruct wordPair = getWord();
-  printf("Category %s\n", wordPair.category);
-
+  printf("Category: %s\n", wordPair.category);
   char word[50];
   strcpy(word, wordPair.word);
-
   int wordLen = strlen(word);
-  char* curr = (char*)malloc(wordLen);
+
+  char curr[wordLen];
   for (int i = 0; i < wordLen; i++){
     curr[i] = '_';
   }
-  while(strstr(curr, '_') != NULL){
+  curr[wordLen] = '\0';
+  int strikes = 6;
+
+  while(strchr(curr, '_') != NULL){
     printf("%s\n", curr);
     printf("Enter Your Letter Guess: \n");
     fflush(stdout);
