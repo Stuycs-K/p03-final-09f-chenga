@@ -11,6 +11,6 @@ Terminal based Hangman Game where player guesses letters to reveal the word with
 
 ### Instructions:
 
-The user launches the game and receives a word from a word bank file. The user then guessed a letter, game displays word state(ie. S _ S _ _ _ S) and the # of incorrect guesses left. Separate Process can provide hints by filling in a correct letter.
+The user launches the game and receives a word from a word bank file. The user then guessed a letter, game displays word state(ie. S _ S _ _ _ S) and the # of incorrect guesses left. Given hints that fill in a correct letter of the word. Game continues for each round guessed correctly, ends when wrote guess leaving a score. User has 10 seconds for each guess.
 
 ### Resources/ References:

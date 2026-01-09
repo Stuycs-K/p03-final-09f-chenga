@@ -8,7 +8,7 @@ Alvin Cheng
 
 # Intended usage:
 
-The user launches the game and receives a word from a word bank file along with a category that the word belongs to. The user then guesses a letter, game displays word state(ie. S _ S _ _ _ S) and the # of incorrect guesses left. Game can provide one hint by filling in a correct letter. Game continues until you lose just once, you have a total of three hints throughout the entire run. 
+The user launches the game and receives a word from a word bank file along with a category that the word belongs to. The user then guesses a letter, game displays word state(ie. S _ S _ _ _ S) and the # of incorrect guesses left. Game can provide one hint by filling in a correct letter. Game continues until you lose just once, you have a total of three hints throughout the entire run. User has 15 seconds per guess. 
 
 # Technical Details:
 
@@ -16,10 +16,9 @@ A description of your technical design. This should include:
 
 How you will be using the topics covered in class in the project.
 
-How you are breaking down the project and who is responsible for which parts.
-
 Files: read dictionary file with word bank, as well as a different one to store highscore. The word bank file will be a csv file with one colume being the category and the other being the word. This will be read into a struct.
 Shared Memory: allow multiple game processes to be run at the same time for highscore
+Forking: Child Process time bomb. Player has 15 seconds to make a guess or else child process sends a kill signal.
 Semaphore: updating shared memory one process at a time
 Signals: exiting
 
@@ -30,7 +29,7 @@ Signals: exiting
 A timeline with expected completion dates of parts of the project.
 Jan 6-7 - basic setup and file I/O
 Jan 8-9 - core game logic
-Jan 10-11 - fork hint process
+Jan 10-11 - hint and child process time bomb
 Jan 12-13 - highscore tracking
 Jan 14 - More testing/debug(edge cases etc)
 Jan 15 - Video

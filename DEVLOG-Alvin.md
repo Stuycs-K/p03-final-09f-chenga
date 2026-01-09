@@ -16,3 +16,5 @@ getWord finished - it gets a struct of two words from the word bank, then gets a
 to be sent to startRound. I intend to make it remove the word from the file when picked so
 that no repeats will be had.
 StartRound currently tells the reader the word and empty current guess and gets from stdin
+also prints number of strikes left till lost
+StartRound adds to main
