@@ -1,6 +1,6 @@
-
+#include "hangman.h"
 
 int main(int argc, char const *argv[]) {
-  /* code */
+  startRound();
   return 0;
 }

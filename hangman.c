@@ -60,16 +60,33 @@ void startRound(){
   curr[wordLen] = '\0';
   int strikes = 6;
 
-  while(strchr(curr, '_') != NULL){
-    printf("%s\n", curr);
+  while(strchr(curr, '_') != NULL && strikes > 0){
+    printf("Word: %s\n", curr);
+    printf("Strikes: %d\n", strikes);
     printf("Enter Your Letter Guess: \n");
     fflush(stdout);
-    char* guess;
+    char guess[10];
     fgets(guess, sizeof(guess), stdin);
-    while(strcasestr(word, guess[0]) != NULL){
-      strcpy(curr[strcasestr(word, guess[0])], word[strcasestr(word, guess[0])]);
-
+    
+    int numfound = 0;
+    for (int i = 0; i < wordLen; i++){
+      if (strcasecmp(word[i], guess[0])){
+        curr[i] = word[i];
+        numfound++;
+      }
+    }
+    if(numfound > 0){
+      printf("Incorrect!\n");
+      strikes--;
     }
   }
+
+  if (strikes > 0){
+    printf("\nCongratulations! The word was: %s\n", word);
+  }
+  else{
+    printf("\nGame Over! The word was: %s\n", word);
+  } 
+
 
 }
