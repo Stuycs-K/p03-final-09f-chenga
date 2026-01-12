@@ -20,6 +20,8 @@ also prints number of strikes left till lost
 StartRound adds to main
 
 ### 2026-01-09 - h_files
-hangman.h
-hints.h
-setup.h
+hangman.h, hints.h, setup.h function prototypes, computers were really slow in class
+
+
+
+

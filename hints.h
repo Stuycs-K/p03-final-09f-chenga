@@ -10,3 +10,5 @@
 #define HINTS_H
 
 int err();
+
+#endif

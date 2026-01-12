@@ -17,3 +17,5 @@ struct wordStruct {
 int err();
 struct wordStruct getWord();
 void startRound();
+
+#endif
