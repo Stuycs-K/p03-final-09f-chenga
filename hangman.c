@@ -37,7 +37,17 @@ struct wordStruct getWord(){
   free(wordsList);
   return chosen;
 }
+
+int timeOut = 0;
+
+static void sighandler(int signo){
+  if (signo == SIGINT){
+    printf("Times Up! Minus one strike!\n");
+    timeOut = 1;
+  }
+}
 int startRound(){
+  signal (SIGUSR1, sighandler);
   struct wordStruct wordPair = getWord();
   printf("Category: %s\n", wordPair.category);
   char word[50];
@@ -57,8 +67,27 @@ int startRound(){
     printf("Strikes: %d\n", strikes);
     printf("Enter Your Letter Guess: \n");
     fflush(stdout);
+
+    timeOut = 0;
+    pid_t timer = fork();
+    if (timer == 0){
+      sleep(15);
+      kill(getppid(), SIGUSR1);
+      exit(0);
+    }
+
+    
     char guess[10];
     fgets(guess, sizeof(guess), stdin);
+
+    kill(timer, SIGKILL);
+    waitpid(timer, NULL, 0);
+
+    if (timeOut){
+      strikes--;
+      continue;
+    }
+
     guess[strcspn(guess, "\n")] = '\0';
 
     int numfound = 0;
@@ -73,7 +102,6 @@ int startRound(){
       strikes--;
     }
   }
-
   if (strikes > 0){
     printf("\nCongratulations! The word was: %s\n", word);
     return 1;
