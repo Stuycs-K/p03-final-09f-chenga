@@ -15,7 +15,7 @@ struct wordStruct {
   char word[50];
 };
 
-int err();
+void err();
 struct wordStruct getWord();
 void startRound();
 

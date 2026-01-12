@@ -9,7 +9,7 @@
 #ifndef SETUP_H
 #define SETUP_H
 
-int err();
+void err();
 int setup();
 
 #endif

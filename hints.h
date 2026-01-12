@@ -9,6 +9,6 @@
 #ifndef HINTS_H
 #define HINTS_H
 
-int err();
+void err();
 
 #endif

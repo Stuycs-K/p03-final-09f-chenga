@@ -1,6 +1,6 @@
 #include "hangman.h"
 
-int err(){
+void err(){
     printf("errno %d\n", errno);
     printf("%s\n", strerror(errno));
     exit(1);
@@ -9,7 +9,7 @@ int err(){
 struct wordStruct getWord(){
   int csv = open("wordBank.csv", O_RDONLY);
   if (csv == -1) err();
-  struct wordStruct * wordsList = (struct wordStruct*)malloc(sizeof(struct wordStruct) * 100); //come back to this
+  struct wordStruct * wordsList = (struct wordStruct*)malloc(sizeof(struct wordStruct) * 100); 
   int wordCount = 0;
   char buffer[1];
   int pos = 0;
@@ -20,7 +20,7 @@ struct wordStruct getWord(){
       lines[pos] = '\0';
       pos = 0;
 
-      sscanf(lines, "%s,%s", &wordsList[wordCount].category, &wordsList[wordCount].word);
+      sscanf(lines, "%s,%s", wordsList[wordCount].category, wordsList[wordCount].word);
       wordCount++;
     }
     else{
@@ -33,7 +33,9 @@ struct wordStruct getWord(){
   srand(time(NULL));
   int wordIndex = rand() % wordCount;
   //change so that when a word is chosen, it is taken out of the csv
-  return wordsList[wordIndex];
+  struct wordStruct chosen = wordsList[wordIndex];
+  free(wordsList);
+  return chosen;
 }
 void startRound(){
   struct wordStruct wordPair = getWord();
@@ -42,7 +44,7 @@ void startRound(){
   strcpy(word, wordPair.word);
   int wordLen = strlen(word);
 
-  char curr[wordLen];
+  char curr[wordLen+1];
   for (int i = 0; i < wordLen; i++){
     curr[i] = '_';
   }
