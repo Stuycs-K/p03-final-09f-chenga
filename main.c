@@ -2,6 +2,6 @@
 
 
 int main(int argc, char const *argv[]) {
-  startRound();
+  playGame();
   return 0;
 }

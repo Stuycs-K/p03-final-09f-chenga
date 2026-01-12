@@ -17,6 +17,7 @@ struct wordStruct {
 
 void err();
 struct wordStruct getWord();
-void startRound();
+int startRound();
+void playGame();
 
 #endif

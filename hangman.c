@@ -37,7 +37,7 @@ struct wordStruct getWord(){
   free(wordsList);
   return chosen;
 }
-void startRound(){
+int startRound(){
   struct wordStruct wordPair = getWord();
   printf("Category: %s\n", wordPair.category);
   char word[50];
@@ -76,8 +76,19 @@ void startRound(){
 
   if (strikes > 0){
     printf("\nCongratulations! The word was: %s\n", word);
+    return 1;
   }
   else{
     printf("\nGame Over! The word was: %s\n", word);
+    return 0;
   }
 }
+
+void playGame(){
+  while(1){
+    if(startRound() == 0) break;
+  }
+  printf("\nThanks for playing!\n");
+}
+
+
