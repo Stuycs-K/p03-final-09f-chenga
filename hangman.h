@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <time.h>
+#include <ctype.h>
 
 #ifndef HANGMAN_H
 #define HANGMAN_H

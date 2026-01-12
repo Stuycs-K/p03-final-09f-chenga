@@ -56,7 +56,7 @@ void startRound(){
     fflush(stdout);
     char guess[10];
     fgets(guess, sizeof(guess), stdin);
-    guess[strcspn(guess, "\n")] = 0; // Remove newline
+    guess[strcspn(guess, "\n")] = '\0';
 
     int numfound = 0;
     for (int i = 0; i < wordLen; i++){
@@ -77,6 +77,4 @@ void startRound(){
   else{
     printf("\nGame Over! The word was: %s\n", word);
   }
-
-
 }
