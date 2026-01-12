@@ -56,15 +56,16 @@ void startRound(){
     fflush(stdout);
     char guess[10];
     fgets(guess, sizeof(guess), stdin);
+    guess[strcspn(guess, "\n")] = 0; // Remove newline
 
     int numfound = 0;
     for (int i = 0; i < wordLen; i++){
-      if (strcasecmp(word[i], guess[0])){
+      if (tolower(word[i]) == tolower(guess[0])){
         curr[i] = word[i];
         numfound++;
       }
     }
-    if(numfound > 0){
+    if(numfound == 0){
       printf("Incorrect!\n");
       strikes--;
     }
