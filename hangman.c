@@ -20,7 +20,7 @@ struct wordStruct getWord(){
       lines[pos] = '\0';
       pos = 0;
 
-      sscanf(lines, "%s,%s", wordsList[wordCount].category, wordsList[wordCount].word);
+      sscanf(lines, "%49[^,],%49[^\n]", wordsList[wordCount].category, wordsList[wordCount].word);
       wordCount++;
     }
     else{
@@ -42,6 +42,7 @@ void startRound(){
   printf("Category: %s\n", wordPair.category);
   char word[50];
   strcpy(word, wordPair.word);
+  word[strcspn(word, "\r\n")] = '\0';
   int wordLen = strlen(word);
 
   char curr[wordLen+1];
