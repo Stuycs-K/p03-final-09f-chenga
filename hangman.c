@@ -7,9 +7,9 @@ void err(){
 }
 
 struct wordStruct getWord(){
-  int csv = open("wordBank.csv", O_RDONLY);
+  int csv = open("wordbank.csv", O_RDONLY);
   if (csv == -1) err();
-  struct wordStruct * wordsList = (struct wordStruct*)malloc(sizeof(struct wordStruct) * 100); 
+  struct wordStruct * wordsList = (struct wordStruct*)malloc(sizeof(struct wordStruct) * 100);
   int wordCount = 0;
   char buffer[1];
   int pos = 0;
@@ -76,7 +76,7 @@ int startRound(){
       exit(0);
     }
 
-    
+
     char guess[10];
     fgets(guess, sizeof(guess), stdin);
 
@@ -118,5 +118,3 @@ void playGame(){
   }
   printf("\nThanks for playing!\n");
 }
-
-
