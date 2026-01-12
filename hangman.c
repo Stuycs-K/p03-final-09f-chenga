@@ -41,13 +41,15 @@ struct wordStruct getWord(){
 int timeOut = 0;
 
 static void sighandler(int signo){
-  if (signo == SIGINT){
+  if (signo == SIGUSR1){
     printf("Times Up! Minus one strike!\n");
     timeOut = 1;
   }
 }
+
 int startRound(){
-  signal (SIGUSR1, sighandler);
+  signal(SIGUSR1, sighandler);
+
   struct wordStruct wordPair = getWord();
   printf("Category: %s\n", wordPair.category);
   char word[50];
@@ -71,18 +73,23 @@ int startRound(){
     timeOut = 0;
     pid_t timer = fork();
     if (timer == 0){
-      sleep(15);
+      sleep(3);
       kill(getppid(), SIGUSR1);
       exit(0);
     }
 
-
     char guess[10];
+    printf("%d\n", timeOut);
+
+    fd_set stdin;
+    FD_ZERO(&stdin);
+    
     fgets(guess, sizeof(guess), stdin);
+
+    //use select
 
     kill(timer, SIGKILL);
     waitpid(timer, NULL, 0);
-
     if (timeOut){
       strikes--;
       continue;
