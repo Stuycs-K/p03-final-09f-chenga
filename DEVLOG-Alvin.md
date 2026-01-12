@@ -22,6 +22,9 @@ StartRound adds to main
 ### 2026-01-09 - h_files
 hangman.h, hints.h, setup.h function prototypes, computers were really slow in class
 
-
+### 2026-01-11 - testing, fix, and timer
+strcasecmp to tolower comparing characters, fixed newfound checker, include ctype.h and include signal.h and include sys/wait.h, updated wordbank, 
+removed & for sscanf, free malloced memory, makefile, removed newline after getword, made startRound into a helper for playGame, 
+added child time bomb with fork and sigusr1
 
 
