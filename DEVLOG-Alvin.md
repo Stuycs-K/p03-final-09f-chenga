@@ -23,8 +23,12 @@ StartRound adds to main
 hangman.h, hints.h, setup.h function prototypes, computers were really slow in class
 
 ### 2026-01-11 - testing, fix, and timer
-strcasecmp to tolower comparing characters, fixed newfound checker, include ctype.h and include signal.h and include sys/wait.h, updated wordbank, 
-removed & for sscanf, free malloced memory, makefile, removed newline after getword, made startRound into a helper for playGame, 
+strcasecmp to tolower comparing characters, fixed newfound checker, include ctype.h and include signal.h and include sys/wait.h, updated wordbank,
+removed & for sscanf, free malloced memory, makefile, removed newline after getword, made startRound into a helper for playGame,
 added child time bomb with fork and sigusr1
 
+### 2026-01-12 
 
+### 2026-01-13 hints
+added hints: checks for "hint" in user input, finds "_" in curr, fills it with the same index from word using strcspn
+changed hint to fill all instances of the character at the index chosen by cspn rather than just the original index
