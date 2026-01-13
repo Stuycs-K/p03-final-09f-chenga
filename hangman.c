@@ -99,8 +99,12 @@ int startRound(){
     guess[strcspn(guess, "\r\n")] = '\0';
     if (strcasecmp(guess, "hint") == 0){
       if (numHints > 0){
-        printf("index of where the hint should be: %ld\n",strcspn(curr, "_"));
-        curr[strcspn(curr, "_")] = word[strcspn(curr, "_")];
+        int hIndex = strcspn(curr, "_");
+        printf("index of where the hint should be: %d\n",hIndex);
+        char hChar = tolower(word[hIndex]);
+        for (int i = 0; i < wordLen; i++){
+          if (tolower(word[i]) == hChar) curr[i] = hChar;
+        }
         numHints--;
       }
       else{
@@ -132,6 +136,7 @@ int startRound(){
 }
 
 void playGame(){
+
   while(1){
     if(startRound() == 0) break;
   }
