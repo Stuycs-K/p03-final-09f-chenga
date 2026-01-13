@@ -39,6 +39,7 @@ struct wordStruct getWord(){
 }
 
 int timeOut = 0;
+int numHints = 3;
 
 static void sighandler(int signo){
   if (signo == SIGUSR1){
@@ -73,7 +74,7 @@ int startRound(){
     timeOut = 0;
     pid_t timer = fork();
     if (timer == 0){
-      sleep(3);
+      sleep(15);
       kill(getppid(), SIGUSR1);
       exit(0);
     }
@@ -81,9 +82,9 @@ int startRound(){
     char guess[10];
     printf("%d\n", timeOut);
 
-    fd_set stdin;
-    FD_ZERO(&stdin);
-    
+    //fd_set stdin;
+    //FD_ZERO(&stdin);
+
     fgets(guess, sizeof(guess), stdin);
 
     //use select
@@ -95,7 +96,18 @@ int startRound(){
       continue;
     }
 
-    guess[strcspn(guess, "\n")] = '\0';
+    guess[strcspn(guess, "\r\n")] = '\0';
+    if (strcasecmp(guess, "hint") == 0){
+      if (numHints > 0){
+        printf("index of where the hint should be: %ld\n",strcspn(curr, "_"));
+        curr[strcspn(curr, "_")] = word[strcspn(curr, "_")];
+        numHints--;
+      }
+      else{
+        printf("No Hints Left\n"); //slight problem: player could spam this to reset the timer
+      }
+      continue;
+    }
 
     int numfound = 0;
     for (int i = 0; i < wordLen; i++){
