@@ -142,7 +142,5 @@ int playGame(){
     score++;
     printf("current score: %d\n", score);
   }
-  update(score);
-  printf("\nThanks for playing!\n");
   return score;
 }
