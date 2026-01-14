@@ -39,7 +39,7 @@ void update(int newScore){
     printf("NEW HIGHSCORE!: %d", *highscore);
   }
   else {
-    printf("Highscore: \n", *highscore);
+    printf("Highscore: %d\n", *highscore);
   }
 
   shmdt(highscore);
