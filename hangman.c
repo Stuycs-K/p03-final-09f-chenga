@@ -136,9 +136,11 @@ int startRound(){
 }
 
 void playGame(){
-
+  int score = 0;
   while(1){
     if(startRound() == 0) break;
+    score++;
+    printf("current score: %d\n", score);
   }
   printf("\nThanks for playing!\n");
 }
