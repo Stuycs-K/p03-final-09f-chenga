@@ -27,8 +27,14 @@ strcasecmp to tolower comparing characters, fixed newfound checker, include ctyp
 removed & for sscanf, free malloced memory, makefile, removed newline after getword, made startRound into a helper for playGame,
 added child time bomb with fork and sigusr1
 
-### 2026-01-12 
+### 2026-01-12
 
 ### 2026-01-13 hints
 added hints: checks for "hint" in user input, finds "_" in curr, fills it with the same index from word using strcspn
 changed hint to fill all instances of the character at the index chosen by cspn rather than just the original index
+
+### 2026-01-14 Semaphore and Shared Memory
+added current score to hangman.c
+created shared memory for highscore tracking, used semaphores for single access, functions: setup() and update()
+changed playGame to return score of the last game played as an int, main runs update with the output of playGame
+added view to setup, user can type highscore to see current highscore(not yet implemented in hangman.c)
