@@ -21,6 +21,6 @@ int val;
 void err();
 void setup();
 void update(int newScore);
-
+void view();
 
 #endif
