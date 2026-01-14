@@ -20,6 +20,6 @@ struct wordStruct {
 void err();
 struct wordStruct getWord();
 int startRound();
-void playGame();
+int playGame();
 
 #endif
