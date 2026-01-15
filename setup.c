@@ -60,7 +60,7 @@ void view(){
 
   shmdt(highscore);
 }
-void remove(){
+void remove0(){
   int shmid;
   shmid = shmget(KEY, sizeof(int), 0);
   shmctl(shmid, IPC_RMID, 0);
