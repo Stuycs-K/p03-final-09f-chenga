@@ -1,12 +1,6 @@
 #include "hangman.h"
 #include "setup.h"
 
-void err(){
-    printf("errno %d\n", errno);
-    printf("%s\n", strerror(errno));
-    exit(1);
-}
-
 struct wordStruct getWord(){
   int csv = open("wordbank.csv", O_RDONLY);
   if (csv == -1) err();
