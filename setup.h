@@ -22,5 +22,6 @@ void err();
 void setup();
 void update(int newScore);
 void view();
+void remove();
 
 #endif

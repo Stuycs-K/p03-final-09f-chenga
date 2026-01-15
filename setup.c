@@ -60,3 +60,13 @@ void view(){
 
   shmdt(highscore);
 }
+void remove(){
+  int shmid;
+  shmid = shmget(KEY, sizeof(int), 0);
+  shmctl(shmid, IPC_RMID, 0);
+
+  int semd;
+  semd = semget(KEY, 1, 0);
+  semctl(semd, 0, IPC_RMID);
+  printf("Removed\n");
+}
