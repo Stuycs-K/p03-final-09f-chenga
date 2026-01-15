@@ -48,7 +48,7 @@ void view(){
   int shmid = shmget(KEY, sizeof(int), 0);
   if (shmid == -1) err();
   int *highscore = shmat(shmid, 0, 0);
-  printf("Current Highscore: %d", *highscore);
+  printf("\nCurrent Highscore: %d\n\n", *highscore);
   shmdt(highscore);
 }
 void remove0(){

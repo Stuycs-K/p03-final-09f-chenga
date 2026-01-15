@@ -47,7 +47,6 @@ int startRound(){
   signal(SIGUSR1, sighandler);
 
   struct wordStruct wordPair = getWord();
-  printf("Category: %s\n", wordPair.category);
   char word[50];
   strcpy(word, wordPair.word);
   word[strcspn(word, "\r\n")] = '\0';
@@ -61,6 +60,7 @@ int startRound(){
   int strikes = 6;
 
   while(strchr(curr, '_') != NULL && strikes > 0){
+    printf("Category: %s\n", wordPair.category);
     printf("Word: %s\n", curr);
     printf("Strikes: %d\n", strikes);
     printf("Enter Your Letter Guess: \n");
