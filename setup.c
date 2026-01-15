@@ -9,8 +9,9 @@ void err(){
 void setup(){
   int *highscore;
   int shmid;
-  shmid = shmget(KEY, sizeof(int), IPC_CREAT | 0666);
+  shmid = shmget(KEY, sizeof(int), IPC_CREAT |IPC_EXCL | 0666);
   if (shmid < 0) err();
+  printf("shmid: %d\n", shmid);
   highscore = shmat(shmid, 0, 0);
   *highscore = 0;
   shmdt(highscore);
@@ -44,20 +45,10 @@ void update(int newScore){
   shmdt(highscore);
 }
 void view(){
-  int semd = semget(KEY, 1, 0);
-  if (semd == -1) err();
-  struct sembuf sb;
-  sb.sem_num = 0;
-  sb.sem_flg = SEM_UNDO;
-  sb.sem_op = -1;
-  if(semop(semd, &sb, 1)==-1) err();
-
   int shmid = shmget(KEY, sizeof(int), 0);
   if (shmid == -1) err();
   int *highscore = shmat(shmid, 0, 0);
-
   printf("Current Highscore: %d", *highscore);
-
   shmdt(highscore);
 }
 void remove0(){
