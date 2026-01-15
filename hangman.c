@@ -1,4 +1,5 @@
 #include "hangman.h"
+#include "setup.h"
 
 void err(){
     printf("errno %d\n", errno);
@@ -110,6 +111,10 @@ int startRound(){
       else{
         printf("No Hints Left\n"); //slight problem: player could spam this to reset the timer
       }
+      continue;
+    }
+    if (strcasecmp(guess, "highscore") == 0){
+      view();
       continue;
     }
 
