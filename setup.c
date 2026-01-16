@@ -20,8 +20,8 @@ void setup(){
 
   int semd = semget(KEY, 1, IPC_CREAT | IPC_EXCL | 0666);
   if (semd < 0) err();
+  union semun users;
   if (semd >= 0){
-    union semun users;
     users.val = 1;
   }
   else{
