@@ -12,6 +12,7 @@ Terminal based Hangman Game where player guesses letters to reveal the word with
 ### Instructions:
 
 To Start, simply 'make compile' and 'make run'. 
+
 './main clear' when game is not running to clear highscore information
 
 RULES:
