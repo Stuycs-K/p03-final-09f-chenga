@@ -7,7 +7,7 @@ Alvin Cheng
 
 ### Project Description:
 
-Terminal based Hangman Game where player guesses letters to reveal the word with file handling, forking processes, semaphore/shared memory, select(), and signal processing. The user launches the game and receives a word from a word bank file. The user then guessed a letter, game displays word state(ie. S _ S _ _ _ S) and the # of incorrect guesses left. Given hints that fill in a correct letter of the word. Game continues for each round guessed correctly, ends when wrote guess leaving a score. User has 10 seconds for each guess.
+Terminal based Hangman Game where player guesses letters to reveal the word with file handling, forking processes, semaphore/shared memory, select(), and signal processing. The user launches the game and receives a word from a word bank file. The user then guessed a letter, game displays word state(ie. S _ S _ _ _ S) and the # of incorrect guesses left. Given hints that fill in a correct letter of the word. Game continues for each round guessed correctly, ends when wrote guess leaving a score. User has 15 seconds for each guess.
 
 ### Instructions:
 
@@ -22,7 +22,7 @@ RULES:
 -Type 'highscore' to view the current highscore
 
 ### Video Link:
-
+https://drive.google.com/file/d/1y7uhAd9Fze1bM5pqg4PtCWp--DU8bw-U/view?usp=sharing
 
 ### Resources/ References:
 No external libraries/resources
