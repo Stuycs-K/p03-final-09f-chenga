@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]) {
 
   if (argc > 1 && strcmp(argv[1], "clear") == 0){
     remove0();
-    printf("Clear Data");
+    printf("Clear Data\n");
     return 0;
   }
 
