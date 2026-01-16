@@ -15,11 +15,16 @@ To Start, simply 'make compile' and 'make run'.
 './main clear' when game is not running to clear highscore information
 
 RULES:
--Keep playing until you lose \n
--You have 6 strikes per round \n
--You have 15 seconds to make a guess before you get a strike \n
--Type 'hint' to use one of your 3 hints for the whole game \n 
--Type 'highscore' to view the current highscore \n
+-Keep playing until you lose 
+
+-You have 6 strikes per round 
+
+-You have 15 seconds to make a guess before you get a strike 
+
+-Type 'hint' to use one of your 3 hints for the whole game 
+
+-Type 'highscore' to view the current highscore 
+
 
 ### Video Link:
 https://drive.google.com/file/d/1y7uhAd9Fze1bM5pqg4PtCWp--DU8bw-U/view?usp=sharing
