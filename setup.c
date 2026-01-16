@@ -43,6 +43,7 @@ void update(int newScore){
     printf("Highscore: %d\n", *highscore);
   }
   shmdt(highscore);
+  sb.sem_op = 1; 
 }
 void view(){
   int shmid = shmget(KEY, sizeof(int), 0);
