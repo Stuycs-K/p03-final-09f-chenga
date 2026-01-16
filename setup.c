@@ -9,17 +9,24 @@ void err(){
 void setup(){
   int *highscore;
   int shmid;
-  shmid = shmget(KEY, sizeof(int), IPC_CREAT |IPC_EXCL | 0666);
+  shmid = shmget(KEY, sizeof(int), IPC_CREAT | 0666);
   if (shmid < 0) err();
   printf("shmid: %d\n", shmid);
   highscore = shmat(shmid, 0, 0);
-  *highscore = 0;
+  if (*highscore < 0){
+    *highscore = 0;
+  }
   shmdt(highscore);
 
   int semd = semget(KEY, 1, IPC_CREAT | IPC_EXCL | 0666);
   if (semd < 0) err();
-  union semun users;
-  users.val = 1;
+  if (semd >= 0){
+    union semun users;
+    users.val = 1;
+  }
+  else{
+    semd = semget(KEY, 1, 0666);
+  }
   semctl(semd, 0, SETVAL, users);
 }
 void update(int newScore){
@@ -27,7 +34,7 @@ void update(int newScore){
   if (semd == -1) err();
   struct sembuf sb;
   sb.sem_num = 0;
-  sb.sem_flg = SEM_UNDO;
+  sb.sem_flg = 0;
   sb.sem_op = -1;
   if(semop(semd, &sb, 1)==-1) err();
 
@@ -42,8 +49,9 @@ void update(int newScore){
   else {
     printf("Highscore: %d\n", *highscore);
   }
-  shmdt(highscore);
   sb.sem_op = 1; 
+  semop(semd, &sb, 1);
+  shmdt(highscore);
 }
 void view(){
   int shmid = shmget(KEY, sizeof(int), 0);

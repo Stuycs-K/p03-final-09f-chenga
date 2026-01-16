@@ -1,6 +1,9 @@
 #include "hangman.h"
 #include "setup.h"
 
+static int timeOut = 0;
+static int numHints = 3;
+
 struct wordStruct getWord(){
   int csv = open("wordbank.csv", O_RDONLY);
   if (csv == -1) err();
@@ -25,7 +28,6 @@ struct wordStruct getWord(){
   }
   close(csv);
 
-  srand(time(NULL));
   int wordIndex = rand() % wordCount;
   //change so that when a word is chosen, it is taken out of the csv
   struct wordStruct chosen = wordsList[wordIndex];
@@ -33,12 +35,9 @@ struct wordStruct getWord(){
   return chosen;
 }
 
-int timeOut = 0;
-int numHints = 3;
 
 static void sighandler(int signo){
   if (signo == SIGUSR1){
-    printf("Times Up! Minus one strike!\n");
     timeOut = 1;
   }
 }
@@ -77,19 +76,34 @@ int startRound(){
     char guess[10];
     printf("%d\n", timeOut);
 
-    //fd_set stdin;
-    //FD_ZERO(&stdin);
+    fd_set readfd;
+    FD_ZERO(&readfd);
+    FD_SET(STDIN_FILENO, &readfd);
+    struct timeval timeout;
+    timeout.tv_sec = 15;
+    timeout.tv_usec = 0;
 
-    fgets(guess, sizeof(guess), stdin);
-
-    //use select
+    int s = select(STDIN_FILENO + 1, &readfd, NULL, NULL, &timeout);
+    if (s <= 0 || timeOut){ // -1 for signal and 0 for timeout
+      printf("Times Up! Minus one strike!\n");
+      strikes--;
+      kill(timer, SIGKILL);
+      waitpid(timer, NULL, 0);
+      continue;
+    }
+    //fgets(guess, sizeof(guess), stdin);
+    if (FD_ISSET(STDIN_FILENO, &readfd)){
+      int rbytes = read(STDIN_FILENO, guess, sizeof(guess) - 1);
+      if (rbytes <= 0){
+        kill(timer, SIGKILL);
+        waitpid(timer, NULL, 0);
+        continue;
+      } 
+      guess[rbytes] = '\0';
+    }
 
     kill(timer, SIGKILL);
     waitpid(timer, NULL, 0);
-    if (timeOut){
-      strikes--;
-      continue;
-    }
 
     guess[strcspn(guess, "\r\n")] = '\0';
     if (strcasecmp(guess, "hint") == 0){

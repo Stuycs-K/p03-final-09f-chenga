@@ -3,10 +3,10 @@
 
 
 int main(int argc, char const *argv[]) {
-  remove0();
+  srand(time(NULL));
   setup();
   update(playGame());
   printf("\nThanks for playing!\n");
-  remove0();
+  //remove0();
   return 0;
 }
