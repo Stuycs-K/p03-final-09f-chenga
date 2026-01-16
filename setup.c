@@ -11,7 +11,7 @@ void setup(){
   int shmid;
   shmid = shmget(KEY, sizeof(int), IPC_CREAT | 0666);
   if (shmid < 0) err();
-  printf("shmid: %d\n", shmid);
+  
   highscore = shmat(shmid, 0, 0);
   if (*highscore < 0){
     *highscore = 0;
@@ -19,15 +19,19 @@ void setup(){
   shmdt(highscore);
 
   int semd = semget(KEY, 1, IPC_CREAT | IPC_EXCL | 0666);
-  if (semd < 0) err();
-  union semun users;
+
   if (semd >= 0){
+    union semun users;
     users.val = 1;
+    semctl(semd, 0, SETVAL, users);
+  }
+  else if (errno == EEXIST){
+    semd = semget(KEY, 1, 0666);
+    if (semd < 0) err();
   }
   else{
-    semd = semget(KEY, 1, 0666);
+    err();
   }
-  semctl(semd, 0, SETVAL, users);
 }
 void update(int newScore){
   int semd = semget(KEY, 1, 0);
