@@ -11,11 +11,10 @@ Terminal based Hangman Game where player guesses letters to reveal the word with
 
 ### Instructions:
 
-To Start, simply 'make compile' and 'make run'. 
+-To Start, simply 'make compile' and 'make run'. 
 
-'./main clear' when game is not running to clear highscore information
+-'./main clear' when game is not running to clear highscore information
 
-RULES:
 -Keep playing until you lose 
 
 -You have 6 strikes per round 
