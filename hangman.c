@@ -64,7 +64,6 @@ int startRound(){
     printf("Strikes: %d\n", strikes);
     printf("Enter Your Letter Guess: \n");
     fflush(stdout);
-
     timeOut = 0;
     pid_t timer = fork();
     if (timer == 0){
@@ -73,8 +72,7 @@ int startRound(){
       exit(0);
     }
 
-    char guess[10];
-    printf("%d\n", timeOut);
+    char guess[100];
 
     fd_set readfd;
     FD_ZERO(&readfd);
@@ -85,7 +83,7 @@ int startRound(){
 
     int s = select(STDIN_FILENO + 1, &readfd, NULL, NULL, &timeout);
     if (s <= 0 || timeOut){ // -1 for signal and 0 for timeout
-      printf("Times Up! Minus one strike!\n");
+      printf("*Times Up! Minus one strike!\n");
       strikes--;
       kill(timer, SIGKILL);
       waitpid(timer, NULL, 0);
@@ -106,10 +104,20 @@ int startRound(){
     waitpid(timer, NULL, 0);
 
     guess[strcspn(guess, "\r\n")] = '\0';
+
+    if (strlen(guess) == 0){
+      continue; //stop highscore double count
+    }
+
+
+    if (strcasecmp(guess, "highscore") == 0){
+      view();
+      continue;
+    }
     if (strcasecmp(guess, "hint") == 0){
       if (numHints > 0){
         int hIndex = strcspn(curr, "_");
-        printf("index of where the hint should be: %d\n",hIndex);
+        //printf("index of where the hint should be: %d\n",hIndex);
         char hChar = tolower(word[hIndex]);
         for (int i = 0; i < wordLen; i++){
           if (tolower(word[i]) == hChar) curr[i] = hChar;
@@ -117,15 +125,10 @@ int startRound(){
         numHints--;
       }
       else{
-        printf("No Hints Left\n"); //slight problem: player could spam this to reset the timer
+        printf("*No Hints Left\n"); //slight problem: player could spam this to reset the timer
       }
       continue;
     }
-    if (strcasecmp(guess, "highscore") == 0){
-      view();
-      continue;
-    }
-
     int numfound = 0;
     for (int i = 0; i < wordLen; i++){
       if (tolower(word[i]) == tolower(guess[0])){
