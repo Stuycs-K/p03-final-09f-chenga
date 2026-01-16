@@ -48,7 +48,7 @@ void update(int newScore){
 
   if (newScore > *highscore){
     *highscore = newScore;
-    printf("NEW HIGHSCORE!: %d", *highscore);
+    printf("NEW HIGHSCORE!: %d\n", *highscore);
   }
   else {
     printf("Highscore: %d\n", *highscore);

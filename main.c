@@ -3,6 +3,13 @@
 
 int main(int argc, char const *argv[]) {
   srand(time(NULL));
+
+  if (argc > 1 && strcmp(argv[1], "clear") == 0){
+    remove0();
+    printf("Clear Data\n");
+    return 0;
+  }
+  
   printf("===========================\n");
   printf("WELCOME TO TERMINAL HANGMAN\n");
   printf("===========================\n");
@@ -14,14 +21,11 @@ int main(int argc, char const *argv[]) {
   printf("-Type 'highscore' to view the current highscore\n");
   printf("===========================\n\n\n");
 
-  if (argc > 1 && strcmp(argv[1], "clear") == 0){
-    remove0();
-    printf("Clear Data\n");
-    return 0;
-  }
 
   setup();
-  update(playGame());
+  int score = playGame();
+  printf("Your Score: %d\n", score);
+  update(score);
   printf("\nThanks for playing!\n");
   return 0;
 }
