@@ -38,3 +38,17 @@ added current score to hangman.c
 created shared memory for highscore tracking, used semaphores for single access, functions: setup() and update()
 changed playGame to return score of the last game played as an int, main runs update with the output of playGame
 added view to setup, user can type highscore to see current highscore(not yet implemented in hangman.c)
+
+### 2026-01-15 Select and highscore fixing
+implement highscore in hangman.c
+added remove0 for semaphores and shared memory, and used in main
+fixed view in setup, called setup in main and remove through ./main clear
+fixed semaphore updating to actually update sb.sem_op
+fixed highscore double printing through length check
+fixed shmem and sema setup for cases where file already existed
+
+
+### 2026-01-16 Video and Readme
+filmed and added video and updated readme, and merged with main
+updated general print stying and formating
+
